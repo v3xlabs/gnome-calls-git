@@ -1,0 +1,38 @@
+name: Build package
+
+on:
+  push:
+    paths:
+      - "aur/**"
+      - ".github/workflows/build.yml"
+  pull_request:
+    paths:
+      - "aur/**"
+      - ".github/workflows/build.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  makepkg:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    container:
+      image: archlinux:latest
+    steps:
+      - name: Install prerequisites
+        run: |
+          pacman -Sy --noconfirm archlinux-keyring
+          pacman -Syu --noconfirm --needed git base-devel sudo
+          useradd -m -G wheel -s /bin/bash builder
+          printf '%s\n' 'builder ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/builder
+
+      - uses: actions/checkout@v4
+
+      - name: makepkg
+        run: |
+          set -euxo pipefail
+          cp -a "${GITHUB_WORKSPACE}/aur" /home/builder/pkg
+          chown -R builder:builder /home/builder/pkg
+          sudo -u builder bash -euxo pipefail -c 'cd ~/pkg && makepkg -sr --noconfirm --noprogressbar'

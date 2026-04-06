@@ -1,6 +1,6 @@
 pkgbase = gnome-calls-git
 	pkgdesc = Phone dialer and call handler built from GNOME Calls git
-	pkgver = 50.0.r0.g0000000
+	pkgver = 50.0.r3.gdfb1c6c
 	pkgrel = 1
 	url = https://gitlab.gnome.org/GNOME/calls
 	arch = x86_64
