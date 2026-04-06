@@ -1,0 +1,7 @@
+calls/
+aur/gnome-calls-git/pkg
+aur/gnome-calls-git/src
+aur/gnome-calls-git/libcall-ui
+aur/gnome-calls-git/*.pkg.tar.*
+aur/gnome-calls-git/*.tar.*
+aur/gnome-calls-git/*.log
