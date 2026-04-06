@@ -1,5 +1,5 @@
 pkgname=gnome-calls-git
-pkgver=50.0.r3.gdfb1c6c
+pkgver=50.0
 pkgrel=1
 pkgdesc="Phone dialer and call handler built from GNOME Calls git"
 arch=(x86_64)
@@ -39,7 +39,7 @@ makedepends=(
 provides=(gnome-calls)
 conflicts=(gnome-calls)
 source=(
-  "calls::git+https://gitlab.gnome.org/GNOME/calls.git"
+  "calls::git+https://gitlab.gnome.org/GNOME/calls.git#tag=v${pkgver}"
   "libcall-ui::git+https://gitlab.gnome.org/World/Phosh/libcall-ui.git#commit=3a2044f8e7c45387954ed35d22c6b6309e6751d6"
 )
 sha256sums=(
